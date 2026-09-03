@@ -1177,23 +1177,17 @@
   function renderBookCovers(){
     if(!bookCardsEl) return;
 
-    bookCardsEl.innerHTML = Object.entries(BOOKS).map(([key, b]) => `
+    BookCardsEl.innerHTML = Object.entries(BOOKS).map(([key, b]) => `
       <button type="button" class="cover-card" data-book="${key}"
               aria-haspopup="dialog" aria-label="${b.title}">
         <span class="cover-square">
           <img src="${b.cover}" alt="${b.title} — book cover"
                loading="lazy"
-               onerror="this.style.display='none'; this.nextElementSibling.hidden=false;">
-          <span class="cover-placeholder" hidden>
-            <strong>${b.title}</strong>
-            <span>Upload JPG cover</span>
-          </span>
+               onerror="this.style.display='none';">
         </span>
         <span class="cover-code">${key}</span>
-        <span class="cover-title">${b.title}</span>
       </button>
     `).join('');
-
     bookCardsEl.querySelectorAll('.cover-card').forEach(el => {
       el.addEventListener('click', () => openBookModal(el.dataset.book));
     });
